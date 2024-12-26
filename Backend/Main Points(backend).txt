@@ -1,0 +1,39 @@
+================Basic Setup===============
+For typescript based project initializing we will make a new foldr then npm init and after it install some devDependencies fo rtypescript typescript,ts-node,@types/node,nodemon insatll all these dep and after it we will initialize the ts congiguration file 
+Command==>npx ts --init and after it make a gitignore file of rit ctrl+shift+L+P add a git ignore and of node 
+npm init @eslint/config is ver imp package which will help us to identify errors in our porject must be available in every project made
+====>After it i will use prettier for better formatiing of code and for setting rules i will make .prettier.json file in which i will define all my rules
+====>Afte this expressjs is installed and also some dep for typescript we add npm install -D @types/express so whis must be installed
+===After this i will install dotenv package npm i dotenv plus for typescript some dep npm i -D @types/dotenv
+===After it i will not make src folder and make app.js file in which i will write my all express code and for server running we will have server.js our entry point in which our server runs
+===================Configuration Setup ==================
+
+==> Also we wil work on a config folder which will take my configurations into count so that we will not have to change in large no of places so process.env.PORT etc we will write this in config and as in some verison of node process.env not extracted properly so we will install dotenv package which will help us to extract everything from env file easily and add it to our config folder  and after it we will make .env file in which all imp things will be kept and also in team work we will make .env.example file for partners in which they can see the imp keys that must be set but kept one thing in mind we will add wrong values of keys in .env.example bcz it must be private  
+===================Mongo Db connection and setup  ==================
+
+===> After it we will set up the mongoDb for this we can use .then() way or async await both are oka and new thing is we sue some extra event function .on('connected') ,.on('error') which is used along with mongoose and by this mongoDb is connected then in server.ts 
+===================Error Handling ==================
+===>After it we will work on erorr handling so as we know there are client and server(route) and in between there are 
+
+many middlewares registered in every middleware we will use next() and pass req to next middleware and so on to req handler and then handler wil sent response back to client , But Global hanlder(Soecial kind of middleware) must e at the end after the req handler if any error comes then we will pass erorr to global error hanlder by using next(error) and then response is send back to client by the Global error handler 
+==>One extra thing is for throwing errors we will use http-error package to send customized error and also it is catched by out global handler and in global handler we wil send res along with error message and error stack but kept one thing in mind errorStack must be sent on development phase not porduction one 
+-----------------------------------------------------------------------------------------------------------
+
+=======================================Basic Setup of Project completed====================================
+-----------------------------------------------------------------------------------------------------------
+
+=======================================Starting with the structure building and logic of Project======================
+Now here comes different that user will built for their easyness one is MVC which is very popular in which we will work by making model,views,controllers but in this project i am trying another good method in which i will make folder according to users and all the user related files will be in it most proably userController,userRouter,userModel;
+
+===============================Register login user working along with jwt ===========================
+Simple as we do before to register a user so when we register a user we will make a token which we send as a response when the user is created and when the user will login the acessToken will be given to the user and send as a response to client and then when client req the jwt token will be added to the header of client so that on server it is verified that it is authenticated user or not
+
+=======================Book Crud Operations along with multer multipart Formdata =====================
+So here now i built mvc for the book so that we will perform crud operations and additonally i have made a bookTypes file which help to make Schema and tell shcema boutt he types of field in the Schema and after it i will start working with multer for working with multipart formdata so this will be done in bookRouter bcz when we add it as a middleware to the book Routes we can acess the files in this way but previously we wil register multer middleware in app.ts which means that wil be public to all 
+//=====================Token verification Middleware work and also authorization of user while creating book ==========
+So as we know we will only allow authorized user to create book so for this user verification is very imp so i wil make a middleware tokenVerification which will help to verify the token and then typecasting is used in which we will make a new _req that is basically allow us to add userId into it this is very important in typescript otherwise it will not allow us to add userId into req we must have to make a new Request whichwill have userId
+//====================Remaining operations Read update and delete===========================
+Read operation can easily done by find method of mongodb and in addition i also add pagination concept with it y use of skip and limit method 
+After this i will work on update method in updating a issue is uploading of new files instead of prev one if updated so 
+for this firstly i will get bookId form params and then get the book fromDb i exists then i will and then validation error if any after it i wil extract data from input fields and check weither new files uploaded or not if uploaded i will add these files into cloudinary and after it i will update the book info by using updateOne method also before it i will check weither user is authorized to do it 
+==>After it i will work on dleete method to delete book for this i will dleet the book after authorization form db but firest i will delete the images and pdf from cloudinary also
